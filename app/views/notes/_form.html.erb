@@ -15,7 +15,7 @@
     <%= form.label :note, style: "display: block" %>
     <%= form.text_field :note %>
   </div>
-
+  
   <div>
     <%= form.label :passed_at, style: "display: block" %>
     <%= form.date_field :passed_at %>
@@ -23,12 +23,13 @@
 
   <div>
     <%= form.label :branch_id, style: "display: block" %>
-    <%= form.text_field :branch_id %>
+    <%= form.collection_select :branch_id, Branch.all, :id, :name %>
+
   </div>
 
   <div>
     <%= form.label :student_id, style: "display: block" %>
-    <%= form.text_field :student_id %>
+    <%= form.collection_select :student_id, Student.all, :id, :fullname %>
   </div>
 
   <div>

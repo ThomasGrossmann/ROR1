@@ -12,7 +12,28 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+      <header class="top-0 sticky p-4">
+        <nav>
+          <ul class="flex justify-end gap-4">
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <%= link_to "Students", students_path %>
+            </li>
+            <li>
+              <%= link_to "Branches", branches_path %>
+            </li>
+            <li>
+              <%= link_to "Teachers", teachers_path %>
+            </li>
+            <li>
+              <%= link_to "Notes", notes_path %>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    <main class="container mx-auto mt-28 px-5 flex flex-col">
       <%= yield %>
     </main>
   </body>

@@ -8,7 +8,7 @@ class CreateStudents < ActiveRecord::Migration[7.1]
       t.string :city
       t.string :email
       t.string :phone
-      t.string :state
+      t.integer :state, default: 0
 
       t.timestamps
     end

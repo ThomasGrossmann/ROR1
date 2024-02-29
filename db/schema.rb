@@ -13,7 +13,7 @@
 ActiveRecord::Schema[7.1].define(version: 2024_02_22_100357) do
   create_table "branches", force: :cascade do |t|
     t.string "name"
-    t.string "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -64,7 +64,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_100357) do
     t.string "city"
     t.string "email"
     t.string "phone"
-    t.string "state"
+    t.integer "state", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

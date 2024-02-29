@@ -48,7 +48,12 @@
 
   <div>
     <%= form.label :state, style: "display: block" %>
-    <%= form.text_field :state %>
+    <%= form.select :state, options_for_select(Student.states.map {|key, value| [key.titleize, Student.states.key(value)]}) %>
+  </div>
+
+  <div>
+    <%= form.label :school_class_ids, "School classes", style: "display: block" %>
+    <%= form.collection_select :school_class_ids, SchoolClass.all, :id, :fullname, {multiple: true} %>
   </div>
 
   <div>

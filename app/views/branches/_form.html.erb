@@ -18,7 +18,7 @@
 
   <div>
     <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
+    <%= form.select :state, options_for_select(Branch.statuses.map {|key, value| [key.titleize, Branch.statuses.key(value)]}) %>
   </div>
 
   <div>

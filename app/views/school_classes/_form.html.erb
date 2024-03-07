@@ -1,8 +1,7 @@
 <%= form_with(model: school_class) do |form| %>
   <% if school_class.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(school_class.errors.count, "error") %> prohibited this school_class from being saved:</h2>
-
+    <div class="p-2 bg-red-200 border border-red-300 rounded-md">
+      <h2 class="text-lg text-red-500"><%= pluralize(school_class.errors.count, "error") %> :</h2>
       <ul>
         <% school_class.errors.each do |error| %>
           <li><%= error.full_message %></li>

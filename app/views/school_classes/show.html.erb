@@ -1,10 +1,25 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @school_class %>
+<div>
+  <span class="text-xl"><%= @school_class.fullname %></span>
+  <% if @school_class.students.any? %>
+    <% for student in @school_class.students %>
+      <p>
+        <strong>Student:</strong>
+        <%= student.fullname %>
+      </p>
+    <% end %>
+  <% else %>
+    <p>
+      <strong>No students</strong>
+      <%= link_to "Add a student", new_student_path, class: "rounded-md p-2 border border-green-300 bg-green-200 hover:bg-green-100" %>
+    </p>
+  <% end %>
+</div>
 
 <div>
-  <%= link_to "Edit this school class", edit_school_class_path(@school_class) %> |
-  <%= link_to "Back to school classes", school_classes_path %>
+  <%= link_to "Edit this school class", edit_school_class_path(@school_class), class:"rounded-md p-2 border border-yellow-300 bg-yellow-200 hover:bg-yellow-100"  %> |
+  <%= link_to "Back to school classes", school_classes_path, class:"rounded-md p-2 border border-slate-300 bg-slate-200 hover:bg-slate-100" %>
 
   <%= button_to "Destroy this school class", @school_class, method: :delete %>
 </div>

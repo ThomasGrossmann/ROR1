@@ -1,22 +1,13 @@
 <div id="<%= dom_id note %>">
-  <p>
-    <strong>Note:</strong>
-    <%= note.note %>
-  </p>
-
-  <p>
-    <strong>Passed at:</strong>
-    <%= note.passed_at %>
-  </p>
-
-  <p>
-    <strong>Branch:</strong>
-    <%= note.branch_id %>
-  </p>
-
-  <p>
-    <strong>Student:</strong>
-    <%= note.student_id %>
-  </p>
-
+  <div class="p-4 flex flex-row justify-between">
+    <div class="flex flex-row gap-4 items-center">
+      <span class="text-lg font-bold"><%= note.student.fullname %></span>
+      <span>|</span>
+      <span><%= note.branch.name %></span>
+    </div>
+    <div class="flex flex-row gap-4">
+      <span>|</span>
+      <span><%= note.note %></span>
+    </div>
+  </div>
 </div>

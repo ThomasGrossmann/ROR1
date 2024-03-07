@@ -1,13 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Teachers</h1>
+<h1 class="text-2xl">Teachers</h1>
 
-<div id="teachers">
+<div class="mt-8 space-y-4" id="teachers">
   <% @teachers.each do |teacher| %>
-    <%= render teacher %>
-    <p>
-      <%= link_to "Show this teacher", teacher %>
-    </p>
+    <div class="flex flex-row justify-between">
+      <%= render teacher %>
+      <p>
+        <%= link_to "Show this teacher", teacher %>
+      </p>
+    </div>
   <% end %>
 </div>
 

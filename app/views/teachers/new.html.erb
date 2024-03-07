@@ -1,9 +1,9 @@
-<h1>New teacher</h1>
+<h1 class="text-3xl">New teacher</h1>
 
 <%= render "form", teacher: @teacher %>
 
 <br>
 
 <div>
-  <%= link_to "Back to teachers", teachers_path %>
+  <%= link_to "Back to teachers", teachers_path, class:"rounded-md p-2 border border-slate-300 bg-slate-200 hover:bg-slate-100" %>
 </div>

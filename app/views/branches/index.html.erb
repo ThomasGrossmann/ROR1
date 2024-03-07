@@ -1,13 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Branches</h1>
+<h1 class="text-2xl">Branches</h1>
 
-<div id="branches">
+<div class="mt-8 space-y-4" id="branches">
   <% @branches.each do |branch| %>
-    <%= render branch %>
-    <p>
-      <%= link_to "Show this branch", branch %>
-    </p>
+    <div class="flex flex-row justify-between">
+      <%= render branch %>
+      <p>
+        <%= link_to "Show this branch", branch %>
+      </p>
+    </div>
   <% end %>
 </div>
 

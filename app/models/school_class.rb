@@ -1,6 +1,6 @@
 class SchoolClass < ApplicationRecord
-  belongs_to :teacher
-  has_and_belongs_to_many :students
+  has_and_belongs_to_many :users
+  has_and_belongs_to_many :branches
 
   validates :name, presence: true
   validates :school_year, presence: true, numericality: { only_integer: true}

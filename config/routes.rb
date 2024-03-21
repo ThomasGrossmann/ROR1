@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :notes
   resources :school_classes
-  resources :students
   resources :branches
-  resources :teachers
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get "/" => "home#index", as: :home

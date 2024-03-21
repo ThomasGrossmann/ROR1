@@ -1,1 +1,11 @@
 <h1 class="text-3xl">ES-DEV</h1>
+
+<% if user_signed_in? %>
+  <p>Welcome <%= current_user.fullname %></p>
+  <p>You are a <%= current_user.type %></p>
+<% else %>
+  <p>You have to Login or create an account to use the plateform.</p>
+  <div>
+      <%= link_to "Login", new_user_session_path %>
+  </div>
+<% end%>

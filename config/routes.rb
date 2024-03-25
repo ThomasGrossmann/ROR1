@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :exams
   devise_for :users
-  resources :notes
+  resources :grades
   resources :school_classes
   resources :students
   resources :branches

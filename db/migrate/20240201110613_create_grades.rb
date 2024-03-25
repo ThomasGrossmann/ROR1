@@ -1,7 +1,7 @@
-class CreateNotes < ActiveRecord::Migration[7.1]
+class CreateGrades < ActiveRecord::Migration[7.1]
   def change
-    create_table :notes do |t|
-      t.decimal :note
+    create_table :grades do |t|
+      t.decimal :grade
       t.date :passed_at
       t.references :branch, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true

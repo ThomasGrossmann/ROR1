@@ -32,15 +32,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_093241) do
     t.index ["user_id", "branch_id"], name: "index_branches_users_on_user_id_and_branch_id"
   end
 
-  create_table "notes", force: :cascade do |t|
-    t.decimal "note"
+  create_table "grades", force: :cascade do |t|
+    t.decimal "grade"
     t.date "passed_at"
     t.integer "branch_id", null: false
-    t.integer "student_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["branch_id"], name: "index_notes_on_branch_id"
-    t.index ["student_id"], name: "index_notes_on_student_id"
+    t.index ["branch_id"], name: "index_grades_on_branch_id"
+    t.index ["user_id"], name: "index_grades_on_user_id"
   end
 
   create_table "school_classes", force: :cascade do |t|
@@ -79,7 +79,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_093241) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "notes", "branches"
-  add_foreign_key "notes", "students"
+  add_foreign_key "grades", "branches"
+  add_foreign_key "grades", "users"
   add_foreign_key "school_classes", "users"
 end

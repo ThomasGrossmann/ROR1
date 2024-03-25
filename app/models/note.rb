@@ -1,10 +1,6 @@
-class Note < ApplicationRecord
+class Grade < ApplicationRecord
   belongs_to :student, class_name: 'User', foreign_key: 'user_id'
-  belongs_to :branch
+  belongs_to :exam
 
-  validates :note, :passed_at, presence: true
-
-  def passed_at_formatted
-    passed_at.strftime("%B #{passed_at.day.ordinalize} %Y")
-  end
+  validates :grade, presence: true
 end

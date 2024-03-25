@@ -1,9 +1,14 @@
 class BranchesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_branch, only: %i[ show edit update destroy ]
 
   # GET /branches or /branches.json
   def index
-    @branches = Branch.all
+    if current_user.teacher?
+      @branches = current_user.branches
+    else
+      @branches = Branch.all
+    end
   end
 
   # GET /branches/1 or /branches/1.json
@@ -65,6 +70,6 @@ class BranchesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def branch_params
-      params.require(:branch).permit(:name, :status)
+      params.require(:branch).permit(:name, :status, teacher_ids: [])
     end
 end

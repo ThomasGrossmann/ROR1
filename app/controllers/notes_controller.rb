@@ -1,9 +1,14 @@
 class NotesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_note, only: %i[ show edit update destroy ]
 
   # GET /notes or /notes.json
   def index
-    @notes = Note.all
+    if current_user.student?
+      @notes = current_user.notes
+    else
+      @notes = Note.all
+    end
   end
 
   # GET /notes/1 or /notes/1.json
@@ -65,6 +70,6 @@ class NotesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def note_params
-      params.require(:note).permit(:note, :passed_at, :branch_id, :student_id)
+      params.require(:note).permit(:note, :passed_at, :branch_id, :user_id)
     end
 end

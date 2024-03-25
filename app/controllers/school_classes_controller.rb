@@ -1,9 +1,14 @@
 class SchoolClassesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_school_class, only: %i[ show edit update destroy ]
 
   # GET /school_classes or /school_classes.json
   def index
-    @school_classes = SchoolClass.all
+    if current_user.student?
+      @school_classes = current_user.school_classes
+    else
+      @school_classes = SchoolClass.all
+    end
   end
 
   # GET /school_classes/1 or /school_classes/1.json
@@ -65,6 +70,6 @@ class SchoolClassesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def school_class_params
-      params.require(:school_class).permit(:name, :school_year, :teacher_id)
+      params.require(:school_class).permit(:name, :school_year, :user_id, student_ids: [])
     end
 end

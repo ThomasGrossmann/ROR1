@@ -1,8 +1,5 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   has_many :notes
   has_and_belongs_to_many :school_classes
@@ -16,7 +13,15 @@ class User < ApplicationRecord
     self.type == "Student"
   end
 
+  def dean? 
+    self.type == "Dean"
+  end
+
   def fullname
     "#{firstname} #{lastname}"
+  end
+
+  def fullname_type
+    "#{fullname} (#{type})"
   end
 end

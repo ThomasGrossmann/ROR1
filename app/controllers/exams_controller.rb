@@ -65,6 +65,6 @@ class ExamsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def exam_params
-      params.fetch(:exam, {})
+      params.require(:exam).permit(:theme, :date, :branch_id)
     end
 end

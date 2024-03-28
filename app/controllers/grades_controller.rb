@@ -30,7 +30,7 @@ class GradesController < ApplicationController
 
     respond_to do |format|
       if @grade.save
-        format.html { redirect_to grade_url(@grade), notice: "grade was successfully created." }
+        format.html { redirect_to grade_url(@grade), notice: "Grade was successfully created." }
         format.json { render :show, status: :created, location: @grade }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,7 +43,7 @@ class GradesController < ApplicationController
   def update
     respond_to do |format|
       if @grade.update(grade_params)
-        format.html { redirect_to grade_url(@grade), notice: "grade was successfully updated." }
+        format.html { redirect_to grade_url(@grade), notice: "Grade was successfully updated." }
         format.json { render :show, status: :ok, location: @grade }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -57,7 +57,7 @@ class GradesController < ApplicationController
     @grade.destroy!
 
     respond_to do |format|
-      format.html { redirect_to grades_url, notice: "grade was successfully destroyed." }
+      format.html { redirect_to grades_url, notice: "Grade was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -70,6 +70,6 @@ class GradesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def grade_params
-      params.require(:grade).permit(:grade, :passed_at, :branch_id, :user_id)
+      params.require(:grade).permit(:grade, :exam_id, :user_id)
     end
 end

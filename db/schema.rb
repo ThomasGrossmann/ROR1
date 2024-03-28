@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_21_093241) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_25_053828) do
   create_table "branches", force: :cascade do |t|
     t.string "name"
     t.integer "status", default: 0
@@ -32,14 +32,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_093241) do
     t.index ["user_id", "branch_id"], name: "index_branches_users_on_user_id_and_branch_id"
   end
 
+  create_table "exams", force: :cascade do |t|
+    t.string "theme"
+    t.date "date"
+    t.integer "branch_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["branch_id"], name: "index_exams_on_branch_id"
+  end
+
   create_table "grades", force: :cascade do |t|
     t.decimal "grade"
-    t.date "passed_at"
-    t.integer "branch_id", null: false
+    t.integer "exam_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["branch_id"], name: "index_grades_on_branch_id"
+    t.index ["exam_id"], name: "index_grades_on_exam_id"
     t.index ["user_id"], name: "index_grades_on_user_id"
   end
 
@@ -79,7 +87,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_093241) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "grades", "branches"
+  add_foreign_key "exams", "branches"
+  add_foreign_key "grades", "exams"
   add_foreign_key "grades", "users"
   add_foreign_key "school_classes", "users"
 end

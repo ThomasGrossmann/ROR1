@@ -1,6 +1,6 @@
 module ApplicationHelper
   def is_active?(controller)
-    params[:controller] == controller ? "text-slate-200" : nil
+    params[:controller] == controller ? "text-slate-300" : nil
   end
 
   def button_style(type)

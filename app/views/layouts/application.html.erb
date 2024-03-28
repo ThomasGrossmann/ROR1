@@ -6,42 +6,106 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-      <header class="top-0 sticky p-4 flex justify-between bg-slate-400">
+  <body x-data="{ isMenuOpen: false }" :class="isMenuOpen ? 'overflow-hidden' : 'overflow-visible'">
+    <header class="top-0 sticky p-4 bg-slate-400">
+      <div class="hidden md:flex justify-between">
         <nav>
           <ul class="flex items-center gap-4">
             <li class="<%= is_active?('home') %>">
               <%= link_to "Home", home_path %>
             </li>
-            <li class="<%= is_active?('school_classes') %>">
-              <%= link_to "School Classes", school_classes_path %>
-            </li>
-            <li class="<%= is_active?('students') %>">
-              <%= link_to "Students", students_path %>
-            </li>
-            <li class="<%= is_active?('branches') %>">
-              <%= link_to "Branches", branches_path %>
-            </li>
-            <li class="<%= is_active?('teachers') %>">
-              <%= link_to "Teachers", teachers_path %>
-            </li>
-            <li class="<%= is_active?('notes') %>">
-              <%= link_to "Notes", notes_path %>
-            </li>
+            <% if user_signed_in?  %>
+              <li class="<%= is_active?('grades') %>">
+                <%= link_to current_user.student? ? 'My Grades' : 'Grades', grades_path %>
+              </li>
+              <li class="<%= is_active?('exams') %>">
+                <%= link_to current_user.student? ? 'My Exams' : 'Exams', exams_path %>
+              </li>
+              <li class="<%= is_active?('school_classes') %>">
+                <%= link_to current_user.student? ? 'My School Classes' : 'School Classes', school_classes_path %>
+              </li>
+              <% if !current_user.student? %>
+                <li class="<%= is_active?('branches') %>">
+                  <%= link_to "Branches", branches_path %>
+                </li>
+                <li class="<%= is_active?('students') %>">
+                  <%= link_to "Students", students_path %>
+                </li>
+              <% end %>
+            <% end %>
           </ul>
         </nav>
-        <div>
-          <a href="/register">Register</a>
-          <span>|</span>
-          <a href="/login">Sign In</a>
+        <div class="flex flex-row gap-3">
+          <% if user_signed_in? %>
+            <span><%= current_user.fullname_type %></span>
+            <span>|</span>
+            <%= button_to "Logout", destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= link_to "Login", new_user_session_path %>
+          <% end %>
         </div>
-      </header>
-    <main class="container mx-auto mt-28 px-5 flex flex-col">
+      </div>
+      <div class="flex md:hidden justify-end">
+        <button @click="isMenuOpen = !isMenuOpen">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+    <nav id="mobile-navigation" class="fixed top-0 right-0 bottom-0 left-0 backdrop-blur-sm z-10" :class="isMenuOpen ? 'block' : 'hidden'">
+      <ul class="absolute top-0 right-0 bottom-0 w-1/2 pt-10 bg-white drop-shadow-2xl z-10">
+        <li class="<%= is_active?('home') %> border-b border-inherit">
+          <%= link_to "Home", home_path, class: "block p-4" %>
+        </li>
+        <% if user_signed_in?  %>
+          <li class="<%= is_active?('grades') %> border-b border-inherit">
+            <%= link_to current_user.student? ? 'My Grades' : 'Grades', grades_path, class: "block p-4" %>
+          </li>
+          <li class="<%= is_active?('exams') %> border-b border-inherit">
+            <%= link_to current_user.student? ? 'My Exams' : 'Exams', exams_path, class: "block p-4" %>
+          </li>
+          <li class="<%= is_active?('school_classes') %> border-b border-inherit">
+            <%= link_to current_user.student? ? 'My School Classes' : 'School Classes', school_classes_path, class: "block p-4" %>
+          </li>
+          <% if !current_user.student? %>
+            <li class="<%= is_active?('branches') %> border-b border-inherit">
+              <%= link_to "Branches", branches_path, class: "block p-4" %>
+            </li>
+            <li class="<%= is_active?('students') %> border-b border-inherit">
+              <%= link_to "Students", students_path, class: "block p-4" %>
+            </li>
+          <% end %>
+          <li class="border-b border-inherit">
+            <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "block p-4 w-full" %>
+          </li>
+        <% else %>
+          <li class="border-b border-inherit">
+            <%= link_to "Login", new_user_session_path, class: "block p-4 text-center" %>
+          </li>
+        <% end %>
+      </ul>
+      <button class="absolute top-0 bottom-0 right-0 left-0" @click="isMenuOpen = !isMenuOpen">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute top-2 right-2 z-10" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </nav>
+    <main class="container mx-auto mt-20 px-5 flex flex-col gap-4">
+      <% if notice %>
+        <p class="p-2 shadow-sm bg-green-100 shadow-green-600 text-green-600"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="p-2 shadow-sm bg-red-100 shadow-red-600 text-red-600"><%= alert %></p>
+      <% end %>
+
       <%= yield %>
     </main>
   </body>

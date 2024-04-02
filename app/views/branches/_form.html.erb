@@ -18,10 +18,20 @@
 
   <div>
     <%= form.label :status, style: "display: block" %>
-    <%= form.select :state, options_for_select(Branch.statuses.map {|key, value| [key.titleize, Branch.statuses.key(value)]}) %>
+    <%= form.select :status, options_for_select(Branch.statuses.map {|key, value| [key.titleize, Branch.statuses.key(value)]}) %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.label :semester_id, style: "display: block" %>
+    <%= form.collection_select :semester_id, Semester.all, :id, :name %>
+  </div>
+
+  <div>
+    <%= form.label :teachers, style: "display: block" %>
+    <%= form.collection_select :teacher_ids, Teacher.all, :id, :fullname, {multiple: true} %>
+  </div>
+
+  <div>
+    <%= form.submit class: button_style('create') %>
   </div>
 <% end %>

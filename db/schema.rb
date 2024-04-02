@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_25_053828) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_01_130631) do
   create_table "branches", force: :cascade do |t|
     t.string "name"
     t.integer "status", default: 0
+    t.integer "semester_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["semester_id"], name: "index_branches_on_semester_id"
   end
 
   create_table "branches_school_classes", id: false, force: :cascade do |t|
@@ -67,6 +69,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_25_053828) do
     t.index ["user_id", "school_class_id"], name: "index_school_classes_users_on_user_id_and_school_class_id"
   end
 
+  create_table "semesters", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -87,6 +97,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_25_053828) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "branches", "semesters"
   add_foreign_key "exams", "branches"
   add_foreign_key "grades", "exams"
   add_foreign_key "grades", "users"

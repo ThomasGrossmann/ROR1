@@ -1,8 +1,11 @@
-<%= render @grade %>
+<div class="mx-auto md:w-2/3 w-full flex">
+  <div class="mx-auto">
+    <%= render @grade %>
 
-<div>
-  <%= link_to "Edit this grade", edit_grade_path(@grade), class: button_style('edit') %> |
-  <%= link_to "Back to grades", grades_path, class: button_style('back') %>
-
-  <%= button_to "Destroy this grade", @grade, method: :delete, class: button_style('delete') %>
+    <%= link_to "Edit this grade", edit_grade_path(@grade), class: button_style('edit') %> |
+    <div class="inline-block ml-2">
+      <%= button_to "Destroy this grade", @grade, method: :delete, class: button_style('delete') %>
+    </div>
+    <%= link_to "Back to grades", grades_path, class: button_style('back') %>
+  </div>
 </div>

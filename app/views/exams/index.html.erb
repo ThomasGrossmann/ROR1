@@ -6,22 +6,65 @@
     <% end %>
   </div>
 
-  <% if @exams.empty? %>
-    <p class="text-lg mt-4">Currently no exams</p>
-  <% else %>
-    <table class="w-full text-left mt-4">
-      <thead class="bg-slate-300 text-lg">
-        <tr>
-          <th class="py-1 px-2">Theme</th>
-          <th class="py-1 px-2">Branch</th>
-          <th class="py-1 px-2">Actions</th>
-        </tr>
-      </thead>
-      <tbody class="[&>*:nth-child(even)]:bg-slate-200">
-        <% @exams.each do |exam| %>
-          <%= render exam %>
-        <% end %>
-      </tbody>
-    </table>
-  <% end %>
+  <div id="exams" class="min-w-full">
+    <% if @exams_for_teached_branches %>
+      <h2 class="text-lg mt-4">For branches you teach</h2>
+      <table class="w-full text-left mt-4">
+        <thead class="bg-slate-300 text-lg">
+          <tr>
+            <th class="py-1 px-2">Branch</th>
+            <th class="py-1 px-2">Date</th>
+          </tr>
+        </thead>
+        <tbody class="[&>*:nth-child(even)]:bg-slate-200">
+          <% @exams_for_teached_branches.each do |exam| %>
+            <tr>
+              <td class="p-2"><%= exam.branch.name %></td>
+              <td class="p-2"><%= exam.date %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+    <% if @exams_for_managed_classes %>
+      <h2 class="text-lg mt-4">For classes you manage</h2>
+      <table class="w-full text-left mt-4">
+        <thead class="bg-slate-300 text-lg">
+          <tr>
+            <th class="py-1 px-2">Class</th>
+            <th class="py-1 px-2">Date</th>
+          </tr>
+        </thead>
+        <tbody class="[&>*:nth-child(even)]:bg-slate-200">
+          <% @exams_for_managed_classes.each do |exam| %>
+            <tr>
+              <td class="p-2"><%= exam.school_class.name %></td>
+              <td class="p-2"><%= exam.date %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+    <% if @exams %>
+      <h2 class="text-lg mt-4">All exams</h2>
+      <table class="w-full text-left mt-4">
+        <thead class="bg-slate-300 text-lg">
+          <tr>
+            <th class="py-1 px-2">Branch</th>
+            <th class="py-1 px-2">Date</th>
+          </tr>
+        </thead>
+        <tbody class="[&>*:nth-child(even)]:bg-slate-200">
+          <% @exams.each do |exam| %>
+            <tr>
+              <td class="p-2"><%= exam.branch.name %></td>
+              <td class="p-2"><%= exam.date %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
 </div>

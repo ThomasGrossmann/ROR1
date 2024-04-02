@@ -1,24 +1,19 @@
-<h1 class="text-2xl">grades</h1>
-
-<div>
-  <% if @grades.empty? %>
-    <p>Currently no grades are assigned</p>
-  <% else %>
-    <div class="flex flex-col gap-4">
-      <% @grades.each do |grade| %>
-        <div class="flex flex-row justify-between items-center">
-          <%= render grade %>
-          <% if !current_user.student? %>
-            <%= link_to "Show this grade", grade, class: button_style('show') %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
-</div>
-
-<% if !current_user.student? %>
-  <div>
-    <%= link_to "New grade", new_grade_path, class: button_style('create') %>
+<div class="w-full">
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Grades</h1>
+    <% if !current_user.student? %>
+      <%= link_to "New grade", new_grade_path, class: button_style('create') %>
+    <% end %>
   </div>
-<% end %>
+
+  <div id="grades" class="min-w-full">
+    <% @grades.group_by(&:student).each do |student, grades| %>
+      <h2><%= student.fullname %></h2>
+      <ul>
+        <% grades.each do |grade| %>
+          <li><%= grade.grade %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>

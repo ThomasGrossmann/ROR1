@@ -3,7 +3,22 @@ class ExamsController < ApplicationController
 
   # GET /exams or /exams.json
   def index
-    @exams = Exam.all
+    if current_user.teacher?
+      if current_user.branches.present?
+        @exams_for_teached_branches = Exam.where(branch_id: current_user.branches.pluck(:id))
+      end
+
+      if current_user.school_classes.present?
+        @exams_for_managed_classes = Exam.joins(:school_class).where(school_classes: { user_id: current_user.id })
+      end
+    else
+      if current_user.student?
+        branch_ids = current_user.school_classes.map(&:branches).flatten.uniq.map(&:id)
+        @exams_for_student = Exam.where(branch_id: branch_ids)
+      else
+        @exams = Exam.all
+      end      
+    end
   end
 
   # GET /exams/1 or /exams/1.json

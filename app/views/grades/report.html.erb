@@ -1,0 +1,53 @@
+<div class="w-full">
+  <form action="<%= grades_report_path %>" method="get" class="flex justify-between items-center">
+    <div>
+      <label for="semester">Select Semester:</label>
+      <select id="semester" name="semester_id">
+        <option value="">All</option>
+        <% @semesters.each do |semester| %>
+          <option value="<%= semester.id %>" <%= 'selected="selected"' if params[:semester_id].to_i == semester.id %>><%= semester.name %></option>
+        <% end %>
+      </select>
+    </div>
+    <div>
+      <label for="student">Select Student:</label>
+      <select id="student" name="student_id">
+        <% @students.each do |student| %>
+          <option value="<%= student.id %>" <%= 'selected="selected"' if params[:student_id].to_i == student.id %>><%= student.fullname %></option>
+        <% end %>
+      </select>
+    </div>
+    <div>
+      <input type="submit" value="Show Grades" class="bg-slate-400 text-white px-4 py-2 rounded">
+    </div>
+  </form>
+
+  <div class="mt-4">
+    <h1 class="font-bold text-4xl">Grades Report <% if @student %>for <%= @student.fullname %> <% end %></h1>
+    <% if !@grades %>
+      <p class="text-lg">Please select a student</p>
+    <% end %>
+  </div>
+
+  <div id="grades" class="w-full text-left mt-4">
+    <table class="min-w-full">
+      <thead class="bg-slate-300 text-lg">
+        <tr>
+          <th class="py-1 px-2">Semester</th>
+          <th class="py-1 px-2">Subject</th>
+          <th class="py-1 px-2">Grade</th>
+        </tr>
+      </thead>
+      <tbody class="[&>*:nth-child(even)]:bg-slate-200">
+        <% if @grades %>
+          <% @grades.each do |grade| %>
+            <tr>
+              <td class="py-1 px-2"><%= grade.exam.branch.semester.number %></td>
+              <td class="py-1 px-2"><%= grade.exam.branch.name %></td>
+              <td class="py-1 px-2"><%= grade.grade %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+</div>

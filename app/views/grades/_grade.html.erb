@@ -1,20 +1,7 @@
 <div id="<%= dom_id grade %>">
-  <% if !current_user.student? %>
-    <% current_user.branches do |branch| %>
-      <% if grade.branch == branch %>
-        <div class="flex flex-col gap-3">
-          <span><%= grade.student.fullname %></span>
-          <span class="text-lg font-bold"><%= grade.branch.name %></span>
-          <span><%= grade.grade %></span>
-          <span class="text-sm opacity-50 italic"><%= grade.passed_at_formatted %></span>
-        </div>
-      <% end %>
-    <% end %>
-  <% end %>
   <div class="flex flex-row gap-4 items-center">
-    <span class="text-lg font-bold"><%= grade.branch.name %></span>
+    <span class="text-lg font-bold"><%= grade.exam.fullname %></span>
     <span>|</span>
     <span><%= grade.grade %></span>
-    <span class="text-sm opacity-50 italic"><%= grade.passed_at_formatted %></span>
   </div>
 </div>

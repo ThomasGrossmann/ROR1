@@ -17,14 +17,8 @@
   </div>
   
   <div>
-    <%= form.label :passed_at, style: "display: block" %>
-    <%= form.date_field :passed_at %>
-  </div>
-
-  <div>
-    <%= form.label :branch_id, style: "display: block" %>
-    <%= form.collection_select :branch_id, Branch.all, :id, :name %>
-
+    <%= form.label :exam_id, style: "display: block" %>
+    <%= form.collection_select :exam_id, Exam.all, :id, :fullname %>
   </div>
 
   <div>

@@ -2,6 +2,6 @@
   <tr>
     <td class="p-2"><%= link_to school_class.fullname, school_class, class: "font-semibold hover:opacity-50" %></td>
     <td class="p-2"><%= school_class.students.count %></td>
-    <td class="p-2"><%= link_to school_class.teacher.fullname, school_class.teacher, class: "font-semibold hover:opacity-50" %></td>
+    <td class="p-2"><%= school_class.teacher.fullname %></td>
   </tr>
 </div>

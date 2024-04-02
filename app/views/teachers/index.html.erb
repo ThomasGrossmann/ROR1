@@ -7,10 +7,10 @@
     <div class="flex flex-row justify-between">
       <%= render teacher %>
       <p>
-        <%= link_to "Show this teacher", teacher %>
+        <%= link_to "Show this teacher", teacher, class: button_style('show') %>
       </p>
     </div>
   <% end %>
 </div>
 
-<%= link_to "New teacher", new_teacher_path %>
+<%= link_to "New teacher", new_teacher_path, class: button_style('create') %>

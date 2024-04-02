@@ -12,7 +12,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body x-data="{ isMenuOpen: false }" :class="isMenuOpen ? 'overflow-hidden' : 'overflow-visible'">
+  <body x-cloak x-data="{ isMenuOpen: false }" :class="isMenuOpen ? 'overflow-hidden' : 'overflow-visible'">
     <header class="top-0 sticky p-4 bg-slate-400">
       <div class="hidden md:flex justify-between">
         <nav>

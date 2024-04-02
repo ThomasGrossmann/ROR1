@@ -3,8 +3,8 @@
 <%= render @teacher %>
 
 <div>
-  <%= link_to "Edit this teacher", edit_teacher_path(@teacher) %> |
-  <%= link_to "Back to teachers", teachers_path %>
+  <%= link_to "Edit this teacher", edit_teacher_path(@teacher), class: button_style('edit') %> |
+  <%= link_to "Back to teachers", teachers_path, class: button_style('back') %>
 
-  <%= button_to "Destroy this teacher", @teacher, method: :delete %>
+  <%= button_to "Destroy this teacher", @teacher, method: :delete, class: button_style('delete') %>
 </div>

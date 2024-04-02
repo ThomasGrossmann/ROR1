@@ -1,12 +1,10 @@
-<div id="<%= dom_id branch %>">
-  <p>
-    <strong>Name:</strong>
-    <%= branch.name %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= branch.status %>
-  </p>
-
-</div>
+<%= link_to branch, class: "w-full md:w-1/4 rounded-md p-2 mt-3 shadow-sm border bg-slate-300 hover:shadow-lg" do %>
+  <div id="<%= dom_id branch %>" class="flex flex-col">
+    <div class="flex flex-row justify-between items-center">
+      <span><%= branch.name %></span>
+      <span class="<%= branch.status_tag_style %>"><%= branch.status.titleize %></span>
+    </div>
+    <span>Exams : <%= branch.exams.count %></span>
+    <span>Teachers : <%= branch.teachers.count %></span>
+  </div>
+<% end %>

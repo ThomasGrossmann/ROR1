@@ -21,11 +21,16 @@
   </div>
 
   <div>
-    <%= form.label :teacher_id, style: "display: block" %>
-    <%= form.collection_select :teacher_id, Teacher.all, :id, :fullname %>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.collection_select :user_id, Teacher.all, :id, :fullname %>
+  </div>
+  
+  <div>
+    <%= form.label :student_ids, style: "display: block" %>
+    <%= form.collection_select :student_ids, Student.all, :id, :fullname, {}, { multiple: true } %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: button_style('create') %>
   </div>
 <% end %>

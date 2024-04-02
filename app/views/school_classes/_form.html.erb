@@ -10,27 +10,27 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="mt-5">
+    <%= form.label :name, class: "block" %>
+    <%= form.text_field :name, class: "w-full" %>
   </div>
 
-  <div>
-    <%= form.label :school_year, style: "display: block" %>
-    <%= form.text_field :school_year %>
+  <div class="mt-5">
+    <%= form.label :school_year, class: "block" %>
+    <%= form.text_field :school_year, class: "w-full" %>
   </div>
 
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.collection_select :user_id, Teacher.all, :id, :fullname %>
+  <div class="mt-5">
+    <%= form.label "Responsible Teacher", class: "block" %>
+    <%= form.collection_select :user_id, Teacher.all, :id, :fullname, class: "w-full" %>
   </div>
   
-  <div>
-    <%= form.label :student_ids, style: "display: block" %>
-    <%= form.collection_select :student_ids, Student.all, :id, :fullname, {}, { multiple: true } %>
+  <div class="mt-5">
+    <%= form.label :students, class: "block" %>
+    <%= form.collection_select :student_ids, Student.all, :id, :fullname, {multiple: true}, class: "w-full" %>
   </div>
 
-  <div>
+  <div class="mt-5">
     <%= form.submit class: button_style('create') %>
   </div>
 <% end %>

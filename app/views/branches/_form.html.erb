@@ -1,8 +1,7 @@
-<%= form_with(model: branch) do |form| %>
+<%= form_with(model: branch, class: "contents") do |form| %>
   <% if branch.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(branch.errors.count, "error") %> prohibited this branch from being saved:</h2>
-
+    <div class="p-2 bg-red-200 border border-red-300 rounded-md">
+      <h2 class="text-lg text-red-500"><%= pluralize(branch.errors.count, "error") %> :</h2>
       <ul>
         <% branch.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,27 +10,27 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="mt-5">
+    <%= form.label :name, class: "block" %>
+    <%= form.text_field :name, class: "w-full" %>
   </div>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.select :status, options_for_select(Branch.statuses.map {|key, value| [key.titleize, Branch.statuses.key(value)]}) %>
+  <div class="mt-5">
+    <%= form.label :status, class: "block" %>
+    <%= form.select :status, options_for_select(Branch.statuses.map {|key, value| [key.titleize, Branch.statuses.key(value)]}), class: "w-full" %>
   </div>
 
-  <div>
-    <%= form.label :semester_id, style: "display: block" %>
-    <%= form.collection_select :semester_id, Semester.all, :id, :name %>
+  <div class="mt-5">
+    <%= form.label :semester, class: "block" %>
+    <%= form.collection_select :semester_id, Semester.all, :id, :name, class: "w-full" %>
   </div>
 
-  <div>
-    <%= form.label :teachers, style: "display: block" %>
-    <%= form.collection_select :teacher_ids, Teacher.all, :id, :fullname, {multiple: true} %>
+  <div class="mt-5">
+    <%= form.label :teachers, class: "block" %>
+    <%= form.collection_select :teacher_ids, Teacher.all, :id, :fullname, {multiple: true}, class: "w-full" %>
   </div>
 
-  <div>
+  <div class="mt-5">
     <%= form.submit class: button_style('create') %>
   </div>
 <% end %>

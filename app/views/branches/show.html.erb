@@ -1,10 +1,44 @@
-<p style="color: green"><%= notice %></p>
+<div class="mx-auto md:w-2/3 w-full flex" x-data="{ openModal: false }">
+  <div class="mx-auto">
+    <h1 class="text-2xl font-bold text-center"><%= @branch.name %></h1>
+    <div class="mt-4">
+      <p><span class="font-bold">Status:</span> <%= @branch.status.titleize %></p>
+      <p><span class="font-bold">Semester:</span> <%= @branch.semester.name %></p>
+      <p><span class="font-bold">Teachers:</span> <%= @branch.teachers.map(&:fullname).join(", ") %></p>
+    </div>
 
-<%= render @branch %>
+    <div class="flex flex-row gap-2 mt-4">
+      <% if !@branch.teachers.any? %>
+        <button @click="openModal = true" class="<%= button_style('create') %>">Assign Teacher</button>
+      <% end %>
+      <%= link_to "Edit this branch", edit_branch_path(@branch), class: button_style('edit') %>
+      <%= button_to "Destroy this branch", branch_path(@branch), method: :delete, class: button_style('delete') %>
+      <%= link_to "Back to branches", branches_path, class:button_style('back') %>
+    </div>
+  </div>
 
-<div>
-  <%= link_to "Edit this branch", edit_branch_path(@branch) %> |
-  <%= link_to "Back to branches", branches_path %>
-
-  <%= button_to "Destroy this branch", @branch, method: :delete %>
+  <!-- Alpine.js modal -->
+  <div x-show="openModal" class="fixed z-10 inset-0 overflow-y-auto" style="display: none;">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+      </div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+      <div @click.away="openModal = false" x-show="openModal" class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+        <%= form_with(model: @branch) do |form| %>
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="mb-4">
+              <%= form.label :teachers, class: "w-full" %>
+              <%= form.collection_select :teacher_ids, Teacher.all, :id, :fullname, {multiple: true}, class: "w-full" %>
+            </div>
+          </div>
+          <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse sm:gap-4">
+            <%= form.submit class: button_style('create') %>
+            <button type="button" @click="openModal = false" class="<%= button_style('delete') %>">Close</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+

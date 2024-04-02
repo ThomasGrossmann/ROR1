@@ -69,6 +69,17 @@ There are 3 "roles" in the application. Student, Teacher and Dean.
 - A Teacher is also an User that can view the Branches he teaches and create Exams and Grades for the Students of the SchoolClasses that follows his Branches
 - A Dean is like an "admin" role that can do everything a Teacher does but he can also manage all resources (create Users, create Branches and assign them to Teachers, generate a Grades Report, etc...)
 
+Login Data :
+- Student
+  - student@test.com
+  - 123123
+- Teacher
+  - teacher@test.com
+  - 123123
+- Dean
+  - dean@test.com
+  - 123123
+
 When running the application for the first time (or when you just logged out), you will be redirected to the home page where you will be able to Login.
 
 The resources will be locked from views if the role has not the rights (at the moment it is only locked in views, if you access certain URLs directly, it will work).

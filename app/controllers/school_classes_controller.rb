@@ -7,7 +7,11 @@ class SchoolClassesController < ApplicationController
     if current_user.student?
       @school_classes = current_user.school_classes
     else
-      @school_classes = SchoolClass.all
+      if current_user.teacher?
+        @school_classes = SchoolClass.where(user_id: current_user.id)
+      else
+        @school_classes = SchoolClass.all
+      end
     end
   end
 

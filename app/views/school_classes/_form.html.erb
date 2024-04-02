@@ -17,7 +17,7 @@
 
   <div class="mt-5">
     <%= form.label :school_year, class: "block" %>
-    <%= form.text_field :school_year, class: "w-full" %>
+    <%= form.number_field :school_year, min: 1980, max: 2050, class: "w-full" %>
   </div>
 
   <div class="mt-5">
